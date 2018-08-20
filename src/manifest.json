@@ -1,0 +1,17 @@
+{
+  "manifest_version": 2,
+  "name": "chrome-hyperdiscovery",
+  "version": "1.0",
+  "permissions": ["webview", "system.network", "storage", ""],
+  "app": {
+    "background": {
+      "scripts": ["background.js"]
+    }
+  },
+  "sockets": {
+    "tcp": { "connect": ["*"] },
+    "udp": { "send": "*", "bind": ["*"] },
+    "tcpServer": { "listen": ["*"] },
+    "udpServer": { "listen": ["*"] }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "name": "chrome-hyperdiscovery",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:pvh/chrome-hyperdiscovery.git",
+  "author": "Peter van Hardenberg <pvh@pvh.ca>",
+  "license": "MIT",
+  "dependencies": {
+    "chrome-dgram": "^3.0.1",
+    "chrome-fs": "^10.0.0",
+    "chrome-net": "^3.3.1",
+    "copy-webpack-plugin": "^4.5.2",
+    "discovery-swarm": "^5.1.2",
+    "utp": "^0.0.10",
+    "webpack": "^4.16.5",
+    "webpack-cli": "^3.1.0"
+  },
+  "scripts": {
+    "start": "webpack --watch"
+  },
+  "browser": {
+    "fs": "chrome-fs",
+    "net": "chrome-net",
+    "dgram": "chrome-dgram"
+  },
+  "devDependencies": {}
+}
