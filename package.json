@@ -16,7 +16,8 @@
     "webpack-cli": "^3.1.0"
   },
   "scripts": {
-    "start": "webpack --watch"
+    "start": "webpack --watch",
+    "discover": "node discover.js"
   },
   "browser": {
     "fs": "chrome-fs",

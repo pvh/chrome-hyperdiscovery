@@ -2,7 +2,7 @@
 
 This is a tiny app skeleton to debug issues with hyperdiscovery in a Chrome App.
 
-To install and test it:
+To install:
 
 1. `yarn install`, `yarn start`
 2. (Hack out any problems that prevent yarn start by removing bittorrent-dht and replacing utp-native with utp.)
@@ -10,7 +10,11 @@ To install and test it:
 4. Enable Developer Mode
 5. Load Unpackaged Extension, browse to the place you checked out the code + "dist".
 6. Navigate to chrome://apps, (double-?)click `chrome-hyperdiscovery`.
-7. Right click the window that appears and click Inspect.
+
+To test:
+
+1. run `yarn discover` in two terminals. You should see them both connect to one another.
+2. Right click the chrome window that appears and click Inspect.
 
 Trivial code is found in `main.jsx`.
 
