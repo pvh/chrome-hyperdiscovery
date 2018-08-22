@@ -17,7 +17,6 @@
   },
   "scripts": {
     "start": "webpack --watch",
-    "postinstall": "patch/install",
     "discover": "node discover.js"
   },
   "devDependencies": {}

@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-
-diff node_modules/discovery-channel/index.js node_modules/discovery-channel/index.js.orig
-diff node_modules/discovery-swarm/index.js node_modules/discovery-swarm/index.js.orig
-diff node_modules/multicast-dns/index.js node_modules/multicast-dns/index.js.orig
-
