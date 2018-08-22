@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+cp patch/discovery-channel.js node_modules/discovery-channel/index.js 
+cp patch/discovery-swarm.js node_modules/discovery-swarm/index.js 
+
+
