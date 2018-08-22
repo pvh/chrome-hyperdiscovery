@@ -9,7 +9,7 @@ var noop = function () {}
 var INTERFACES = []
 
 if (typeof chrome !== 'undefined') {
-  INTERFACES.push("127.0.0.1");
+//  INTERFACES.push("127.0.0.1");
   chrome.system.network.getNetworkInterfaces((ifaces) => {
     for (let i = 0; i < ifaces.length; i++) {
       if (ifaces[i].prefixLength == 24) {
