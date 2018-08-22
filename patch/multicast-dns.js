@@ -6,6 +6,34 @@ var os = require('os')
 
 var noop = function () {}
 
+var INTERFACES = []
+
+if (typeof chrome !== 'undefined') {
+  INTERFACES.push("127.0.0.1");
+  chrome.system.network.getNetworkInterfaces((ifaces) => {
+    for (let i = 0; i < ifaces.length; i++) {
+      if (ifaces[i].prefixLength == 24) {
+        INTERFACES.push(ifaces[i].address)
+      }
+    }
+  })
+} else {
+  var networks = os.networkInterfaces()
+  var names = Object.keys(networks)
+
+  for (var i = 0; i < names.length; i++) {
+    var net = networks[names[i]]
+    for (var j = 0; j < net.length; j++) {
+      var iface = net[j]
+      if (iface.family === 'IPv4') {
+        INTERFACES.push(iface.address)
+        // could only addMembership once per interface (https://nodejs.org/api/dgram.html#dgram_socket_addmembership_multicastaddress_multicastinterface)
+        break
+      }
+    }
+  }
+}
+
 module.exports = function (opts) {
   if (!opts) opts = {}
 
@@ -152,6 +180,9 @@ module.exports = function (opts) {
 }
 
 function defaultInterface () {
+  if (typeof chrome === 'undefined') {
+    return "0.0.0.0"
+  }
   var networks = os.networkInterfaces()
   var names = Object.keys(networks)
 
@@ -167,6 +198,8 @@ function defaultInterface () {
 }
 
 function allInterfaces () {
+  return INTERFACES;
+/*
   var networks = os.networkInterfaces()
   var names = Object.keys(networks)
   var res = []
@@ -184,4 +217,5 @@ function allInterfaces () {
   }
 
   return res
+*/
 }
