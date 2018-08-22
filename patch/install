@@ -2,5 +2,6 @@
 
 cp patch/discovery-channel.js node_modules/discovery-channel/index.js 
 cp patch/discovery-swarm.js node_modules/discovery-swarm/index.js 
+cp patch/multicast-dns.js node_modules/multicast-dns/index.js 
 
 
