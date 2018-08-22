@@ -20,10 +20,5 @@
     "postinstall": "patch/install",
     "discover": "node discover.js"
   },
-  "browser": {
-    "fs": "chrome-fs",
-    "net": "chrome-net",
-    "dgram": "chrome-dgram"
-  },
   "devDependencies": {}
 }
