@@ -8,7 +8,7 @@ var DEFAULT_DISCOVERY = [
 
 setTimeout( ()=> {
   //var sw = swarm({ utp: false, dns: {multicast: false, server: DEFAULT_DISCOVERY, domain: DAT_DOMAIN}})
-  var dc = DiscoveryChannel({dht: false})
+  var dc = DiscoveryChannel({dht: false, dns: {multicast: false, server: DEFAULT_DISCOVERY, domain: DAT_DOMAIN}})
 
   dc.join('discovery-channel-test', 1025 + Math.floor(Math.random() * 100))
   console.log('joined chrome-app-test')
