@@ -1,10 +1,20 @@
 var swarm = require("discovery-swarm")
 
-var sw = swarm({ utp: false })
+var DAT_DOMAIN = 'dat.local'
+var DEFAULT_DISCOVERY = [
+  'discovery1.datprotocol.com',
+  'discovery2.datprotocol.com'
+]
 
-sw.listen(1025 + Math.floor(Math.random() * 100))
-sw.join('chrome-app-test') // can be any id/name/hash
+setTimeout( ()=> {
+  //var sw = swarm({ utp: false, dns: {multicast: false, server: DEFAULT_DISCOVERY, domain: DAT_DOMAIN}})
+  var sw = swarm({ utp: false, dns: {multicast: true}})
 
-sw.on("connection", function(connection) {
-  console.log("found + connected to peer", connection)
-})
+  sw.listen(1025 + Math.floor(Math.random() * 100))
+  sw.join('chrome-app-test') // can be any id/name/hash
+  console.log('joined chrome-app-test')
+
+  sw.on("connection", function(connection) {
+    console.log("found + connected to peer", connection)
+  })
+}, 1000)

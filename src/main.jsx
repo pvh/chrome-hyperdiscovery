@@ -1,47 +1,19 @@
-var swarm = require('discovery-swarm')
+var swarm = require("discovery-swarm")
 
-setTimeout( function() {
-/*  var sw = swarm()
-  sw.listen()
-  sw.join('chrome-app-test')
-  sw.on('connection', function (connection) {
-    console.log(connection)
-  })*/
-  var mdns = require('multicast-dns')()
+var DAT_DOMAIN = 'dat.local'
+var DEFAULT_DISCOVERY = [
+  'discovery1.datprotocol.com',
+  'discovery2.datprotocol.com'
+]
 
-mdns.on('warning', function (err) {
-  console.log(err.stack)
-})
+setTimeout( ()=> {
+  //var sw = swarm({ utp: false, dns: {multicast: false, server: DEFAULT_DISCOVERY, domain: DAT_DOMAIN}})
+  var sw = swarm({ utp: false, dns: {multicast: true}})
 
-mdns.on('response', function (response) {
-  console.log('got a response packet:', response)
-})
+  sw.listen(1025 + Math.floor(Math.random() * 100))
+  sw.join('chrome-app-test') // can be any id/name/hash
 
-mdns.on('query', function (query) {
-  console.log('got a query packet:', query)
-
-  // iterate over all questions to check if we should respond
-  query.questions.forEach(function (q) {
-    if (q.type === 'A' && q.name === 'example.local') {
-      // send an A-record response for example.local
-      mdns.respond({
-        answers: [{
-          name: 'example.local',
-          type: 'A',
-          ttl: 300,
-          data: '192.168.1.5'
-        }]
-      })
-    }
+  sw.on("connection", function(connection) {
+    console.log("found + connected to peer", connection)
   })
-})
-
-// lets query for an A-record for example.local
-mdns.query({
-  questions: [{
-    name: 'example.local',
-    type: 'A'
-  }]
-})
-
-}, 1000)
+}, 2000)

@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "chrome-hyperdiscovery",
   "version": "1.0",
-  "permissions": ["webview", "system.network", "storage", ""],
+  "permissions": ["webview", "system.network", "storage", "fileSystem", "unlimitedStorage"],
   "app": {
     "background": {
       "scripts": ["background.js"]
