@@ -545,6 +545,12 @@ chownr@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/chownr/-/chownr-1.0.1.tgz#e2a75042a9551908bebd25b8523d5f9769d79181"
 
+chrome-debug@orionz/debug:
+  version "3.1.0"
+  resolved "https://codeload.github.com/orionz/debug/tar.gz/4852a797af5ee5854dd8ee39d8b7f6e4bf48cf8e"
+  dependencies:
+    ms "^2.1.1"
+
 chrome-dgram@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/chrome-dgram/-/chrome-dgram-3.0.1.tgz#42a388d04da063865a79e3ba2ae5fbf8ab0f1dba"
@@ -1867,6 +1873,10 @@ move-concurrently@^1.0.1:
 ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
+
+ms@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.1.tgz#30a5864eb3ebb0a66f2ebe6d727af06a09d86e0a"
 
 multicast-dns@^7.0.0:
   version "7.0.1"

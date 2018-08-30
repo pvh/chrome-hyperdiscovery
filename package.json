@@ -9,6 +9,7 @@
     "chrome-dgram": "^3.0.1",
     "chrome-fs": "^10.0.0",
     "chrome-net": "^3.3.1",
+    "chrome-debug": "orionz/debug",
     "copy-webpack-plugin": "^4.5.2",
     "discovery-swarm": "^5.1.2",
     "hypercore": "^6.18.2",

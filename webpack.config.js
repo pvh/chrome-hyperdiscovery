@@ -15,6 +15,7 @@ module.exports = {
   },
   resolve: {
     alias: { 
+      debug: "chrome-debug", 
       dgram: "chrome-dgram", 
       net: "chrome-net",
       "utp-native": "utp",
