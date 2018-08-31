@@ -1,4 +1,4 @@
-var DiscoveryChannel = require("discovery-channel")
+var DiscoverySwarm = require("discovery-swarm")
 
 var DAT_DOMAIN = 'dat.local'
 var DEFAULT_DISCOVERY = [
@@ -7,14 +7,24 @@ var DEFAULT_DISCOVERY = [
 ]
 
 setTimeout( ()=> {
-  //var sw = swarm({ utp: false, dns: {multicast: false, server: DEFAULT_DISCOVERY, domain: DAT_DOMAIN}})
-  var dc = DiscoveryChannel({dht: false, dns: {multicast: false, server: DEFAULT_DISCOVERY, domain: DAT_DOMAIN}})
+  var ds = DiscoverySwarm({utp: true, tcp: false, dht: false, dns: {multicast: false, server: DEFAULT_DISCOVERY, domain: DAT_DOMAIN}})
 
-  dc.join('discovery-channel-test', 1025 + Math.floor(Math.random() * 100))
+  ds.join('discovery-channel-test')
   console.log('joined chrome-app-test')
-  console.log(dc.list())
+  console.log(ds)
 
-  dc.on('peer', function(id, peer, type) {
-    console.log("found + connected to peer", id, peer, type)
+  ds.on('peer', function (connection) {
+    console.log('found a peer', connection)
+  })
+
+  ds.on('connecting', function (peer) {
+    console.log('connecting to peer', peer)
+  })
+
+  ds.on('connection', function(peer) {
+    console.log("found + connected to peer", peer)
+    console.log(peer.channel)
+    peer.channel.on('message', (message) => console.log(message))
+    peer.channel.send("sent by discover.js")
   })
 }, 1000)

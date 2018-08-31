@@ -14,7 +14,7 @@ module.exports = {
     filename: "[name].js",
   },
   resolve: {
-    alias: { 
+    alias: {
       dgram: "chrome-dgram", 
       net: "chrome-net",
       "utp-native": "utp",
