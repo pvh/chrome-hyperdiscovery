@@ -1,6 +1,4 @@
 
-process.hrtime = require('browser-process-hrtime')
-
 setTimeout( ()=> {
   var swarm = require('discovery-swarm')
 
@@ -10,7 +8,7 @@ var DEFAULT_DISCOVERY = [
   'discovery2.datprotocol.com'
 ]
 
-var str = `hello world from a chrome app ${Math.round(Math.random() * 100)}`
+var str = `hello world from a discovery.js instance ${Math.round(Math.random() * 100)}`
 
 var sw = swarm({utp: true, tcp: false, dht: false, dns: {server: DEFAULT_DISCOVERY, domain: DAT_DOMAIN}})
 
