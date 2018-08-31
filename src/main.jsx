@@ -1,4 +1,8 @@
-var DiscoveryChannel = require("discovery-channel")
+
+process.hrtime = require('browser-process-hrtime')
+
+setTimeout( ()=> {
+  var swarm = require('discovery-swarm')
 
 var DAT_DOMAIN = 'dat.local'
 var DEFAULT_DISCOVERY = [
@@ -6,15 +10,21 @@ var DEFAULT_DISCOVERY = [
   'discovery2.datprotocol.com'
 ]
 
-setTimeout( ()=> {
-  //var sw = swarm({ utp: false, dns: {multicast: false, server: DEFAULT_DISCOVERY, domain: DAT_DOMAIN}})
-  var dc = DiscoveryChannel({dht: false})
+var str = `hello world from a chrome app ${Math.round(Math.random() * 100)}`
 
-  dc.join('discovery-channel-test', 1025 + Math.floor(Math.random() * 100))
-  console.log('joined chrome-app-test')
-  console.log(dc.list())
+var sw = swarm({utp: true, tcp: false, dht: false, dns: {server: DEFAULT_DISCOVERY, domain: DAT_DOMAIN}})
 
-  dc.on('peer', function(id, peer, type) {
-    console.log("found + connected to peer", id, peer, type)
+sw.listen()
+sw.join('somekindoftest') // can be any id/name/hash
+
+console.log('mine:', str)
+
+sw.on('connection', function (connection) {
+  console.log('found + connected to peer', connection)
+  connection.write(str)
+  connection.on('data', function (data) {
+    console.log('echo: ' + data)
   })
+})
+
 }, 1000)
