@@ -566,6 +566,13 @@ chrome-fs@^10.0.0:
   version "10.0.0"
   resolved "https://registry.yarnpkg.com/chrome-fs/-/chrome-fs-10.0.0.tgz#768561b062892bdf48521670f5f7446fc7060a2f"
 
+chrome-multicast-dns@orionz/multicast-dns#aeadd27f981c7fcf706608f22bf41f818df56f9c:
+  version "7.0.1"
+  resolved "https://codeload.github.com/orionz/multicast-dns/tar.gz/aeadd27f981c7fcf706608f22bf41f818df56f9c"
+  dependencies:
+    dns-packet "^4.0.0"
+    thunky "^1.0.2"
+
 chrome-net@^3.3.1:
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/chrome-net/-/chrome-net-3.3.1.tgz#b4041edb5b264222e7e3c96101344b2332c86782"

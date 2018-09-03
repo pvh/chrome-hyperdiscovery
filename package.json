@@ -11,6 +11,7 @@
     "chrome-fs": "^10.0.0",
     "chrome-net": "^3.3.1",
     "chrome-debug": "orionz/debug",
+    "chrome-multicast-dns": "orionz/multicast-dns#aeadd27f981c7fcf706608f22bf41f818df56f9c",
     "copy-webpack-plugin": "^4.5.2",
     "discovery-swarm": "^5.1.2",
     "hypercore": "^6.18.2",

@@ -12,7 +12,7 @@ var DEFAULT_DISCOVERY = [
 
 var apptype = `discover.js`
 
-var sw = swarm({utp: true, tcp: false, dht: false, dns: {server: DEFAULT_DISCOVERY, domain: DAT_DOMAIN}})
+var sw = swarm({utp: false, tcp: true, dht: false }) //, dns: {server: DEFAULT_DISCOVERY, domain: DAT_DOMAIN}})
 
 sw.listen(0, () => console.log("we are on port ", sw.address().port))
 sw.join('peter') // can be any id/name/hash
