@@ -23,10 +23,17 @@ module.exports = {
       "bittorrent-dht": path.resolve(__dirname, "stubs", "bittorrent-dht"),
       "random-access-file": path.resolve(__dirname, "stubs", "bittorrent-dht"),
     },
-    extensions: [".js"],
+    extensions: [".js", ".jsx"],
   },
   module: {
     rules: [
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+        },
+      },
     ],
   },
   plugins: [new CopyWebpackPlugin(["./src/manifest.json", "./src/index.html"])],
