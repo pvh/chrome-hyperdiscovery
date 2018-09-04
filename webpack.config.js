@@ -21,6 +21,7 @@ module.exports = {
       net: "chrome-net",
       "utp-native": "utp",
       "bittorrent-dht": path.resolve(__dirname, "stubs", "bittorrent-dht"),
+      "random-access-file": path.resolve(__dirname, "stubs", "bittorrent-dht"),
     },
     extensions: [".js"],
   },

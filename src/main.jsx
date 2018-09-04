@@ -3,7 +3,7 @@ process.hrtime = require('browser-process-hrtime')
 
 setTimeout( ()=> {
 
-  let Hypermerge = require('./src/hypermerge/index')
+  let Hypermerge = require('../src/hypermerge/index')
   let racf = require("random-access-chrome-file")
 //  var raf = require('random-access-file')
 //  var ram = require('random-access-memory')
