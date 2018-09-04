@@ -14,6 +14,8 @@ export default class DebugHome extends React.Component {
 
     return (
       <div>
+        <button onClick={this.createEmptyDoc}>Create new doc</button>
+
         <h3>Add Doc Id:</h3>
         <form onSubmit={this.submitDocId}>
           <input
@@ -72,6 +74,14 @@ export default class DebugHome extends React.Component {
     this.props.hm.openHandle(docId)
 
     this.setState({ docId: "" })
+  }
+
+  createEmptyDoc = () => {
+    const { hm } = this.props
+
+    hm.change(hm.create(), doc => {
+      doc.updatedAt = new Date().toISOString()
+    })
   }
 }
 
