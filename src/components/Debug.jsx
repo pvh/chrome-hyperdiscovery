@@ -1,6 +1,7 @@
 import * as React from "react"
 import DebugDoc from "./DebugDoc"
-import DebugSwarm from "./DebugSwarm"
+import DebugHome from "./DebugHome"
+import DebugFeed from "./DebugFeed"
 
 export default class Debug extends React.Component {
   state = { route: { type: "" }, docId: "" }
@@ -20,45 +21,47 @@ export default class Debug extends React.Component {
   }
 
   render() {
+    return (
+      <div
+        style={{
+          userSelect: "text",
+          overflow: "auto",
+          position: "fixed",
+          top: 0,
+          left: 0,
+          bottom: 0,
+          right: 0,
+          backgroundColor: "white",
+          padding: 20,
+        }}>
+        <ul>
+          <li>
+            <a href="#">Home</a>
+          </li>
+          <li>
+            <a href="" onClick={this.reload}>
+              Reload
+            </a>
+          </li>
+        </ul>
+        <div>{this.renderRoute()}</div>
+      </div>
+    )
+  }
+
+  renderRoute() {
     const { hm } = this.props
     const { docId, route } = this.state
 
     switch (route.type) {
       case "":
-        return (
-          <div style={{ userSelect: "text" }}>
-            <h3>Add Doc Id:</h3>
-            <form onSubmit={this.submitDocId}>
-              <input
-                placeholder="abc123"
-                size="64"
-                onChange={this.docIdChange}
-                value={docId}
-              />
-            </form>
-
-            <h3>Docs:</h3>
-            <ul>
-              {Object.entries(hm.docs).map(([id, doc]) => (
-                <li key={id}>
-                  <a href={`#doc/${id}`}>
-                    <DebugDocId id={id} />
-                  </a>
-                  <DebugClock doc={doc} />
-                </li>
-              ))}
-              <DebugSwarm swarm={hm.swarm} />
-            </ul>
-          </div>
-        )
+        return <DebugHome hm={hm} />
 
       case "doc":
-        return (
-          <div style={{ userSelect: "text" }}>
-            <a href="#">Back</a>
-            <DebugDoc hm={hm} id={route.id} />
-          </div>
-        )
+        return <DebugDoc hm={hm} id={route.id} />
+
+      case "feed":
+        return <DebugFeed hm={hm} id={route.id} />
 
       default:
         return (
@@ -68,6 +71,11 @@ export default class Debug extends React.Component {
           </div>
         )
     }
+  }
+
+  reload = event => {
+    event.preventDefault()
+    this.forceUpdate()
   }
 
   changed = () => {

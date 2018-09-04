@@ -1,6 +1,5 @@
 import * as React from "react"
-import DebugDoc from "./DebugDoc"
-import DebugSwarm from "./DebugSwarm"
+import DebugLogger from "./DebugLogger"
 
 export default class DebugObject extends React.Component {
   render() {
@@ -14,7 +13,8 @@ export default class DebugObject extends React.Component {
             ? "undefined"
             : Object.entries(obj).map(([k, v]) => (
                 <li key={k}>
-                  <b>{k}:</b> {map(v)}
+                  <b>{k}</b>
+                  <DebugLogger tag={k} get={() => obj[k]} />: {map(v)}
                 </li>
               ))}
       </ul>
