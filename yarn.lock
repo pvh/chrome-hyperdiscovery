@@ -190,6 +190,19 @@ anymatch@^2.0.0:
     micromatch "^3.1.4"
     normalize-path "^2.1.1"
 
+append-tree@^2.3.5, append-tree@^2.4.1:
+  version "2.4.4"
+  resolved "https://registry.yarnpkg.com/append-tree/-/append-tree-2.4.4.tgz#ca154f705440a5b5deb4d04d4d60dbb68254213c"
+  dependencies:
+    array-lru "^1.1.1"
+    codecs "^1.2.0"
+    from2 "^2.3.0"
+    inherits "^2.0.3"
+    mutexify "^1.1.0"
+    process-nextick-args "^1.0.7"
+    protocol-buffers-encodings "^1.1.0"
+    varint "^5.0.0"
+
 aproba@^1.0.3, aproba@^1.1.1:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/aproba/-/aproba-1.2.0.tgz#6802e6264efd18c790a1b0d517f0f2627bf2c94a"
@@ -213,7 +226,7 @@ arr-union@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/arr-union/-/arr-union-3.1.0.tgz#e39b09aea9def866a8f206e288af63919bae39c4"
 
-array-lru@^1.1.0:
+array-lru@^1.1.0, array-lru@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/array-lru/-/array-lru-1.1.1.tgz#0c7e1b4e022ae166ff1e8448c595f3181fcd3337"
 
@@ -264,6 +277,15 @@ atob@^2.1.1:
 atomic-batcher@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/atomic-batcher/-/atomic-batcher-1.0.2.tgz#d16901d10ccec59516c197b9ccd8930689b813b4"
+
+automerge@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/automerge/-/automerge-0.8.0.tgz#dd5b8073d2b56801a4354bb0955d67bbceece9f6"
+  dependencies:
+    immutable "^3.8.2"
+    transit-immutable-js "^0.7.0"
+    transit-js "^0.8.861"
+    uuid "3.1.0"
 
 balanced-match@^1.0.0:
   version "1.0.0"
@@ -805,11 +827,25 @@ dat-swarm-defaults@^1.0.1:
   dependencies:
     xtend "^4.0.1"
 
+datcat@^1.1.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/datcat/-/datcat-1.2.0.tgz#3e55409cb61fd04826350f73bc51a9a492c3193f"
+  dependencies:
+    append-tree "^2.4.1"
+    dat-swarm-defaults "^1.0.1"
+    discovery-swarm "^5.1.1"
+    duplexify "^3.5.4"
+    hypercore "^6.13.0"
+    hyperdrive "^9.12.3"
+    pump "^3.0.0"
+    random-access-memory "^2.4.0"
+    through2 "^2.0.3"
+
 date-now@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/date-now/-/date-now-0.1.4.tgz#eaf439fd4d4848ad74e5cc7dbef200672b9e345b"
 
-debug@^2.1.2, debug@^2.2.0, debug@^2.3.3, debug@^2.6.9:
+debug@^2.1.2, debug@^2.2.0, debug@^2.3.3, debug@^2.4.5, debug@^2.5.2, debug@^2.6.8, debug@^2.6.9:
   version "2.6.9"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.9.tgz#5d128515df134ff327e90a4c93f4e077a536341f"
   dependencies:
@@ -884,7 +920,7 @@ dir-glob@^2.0.0:
     arrify "^1.0.1"
     path-type "^3.0.0"
 
-discovery-channel@^5.5.1:
+discovery-channel@^5.3.0, discovery-channel@^5.5.1:
   version "5.5.1"
   resolved "https://registry.yarnpkg.com/discovery-channel/-/discovery-channel-5.5.1.tgz#9af6fc7f8cecdff40dbe4f13a49463718d4cd676"
   dependencies:
@@ -894,6 +930,20 @@ discovery-channel@^5.5.1:
     dns-discovery "^6.0.1"
     pretty-hash "^1.0.1"
     thunky "^0.1.0"
+
+discovery-swarm@^4.3.7:
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/discovery-swarm/-/discovery-swarm-4.4.2.tgz#5d3160a46019e50e874195765df7d601ee55a813"
+  dependencies:
+    buffer-equals "^1.0.3"
+    connections "^1.4.2"
+    debug "^2.4.5"
+    discovery-channel "^5.3.0"
+    length-prefixed-message "^3.0.3"
+    pump "^1.0.1"
+    to-buffer "^1.0.1"
+  optionalDependencies:
+    utp-native "^1.2.2"
 
 discovery-swarm@^5.1.1, discovery-swarm@^5.1.2:
   version "5.1.2"
@@ -941,7 +991,7 @@ domain-browser@^1.1.1:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/domain-browser/-/domain-browser-1.2.0.tgz#3d31f50191a6749dd1375a7f522e823d42e54eda"
 
-duplexify@^3.4.2, duplexify@^3.6.0:
+duplexify@^3.4.2, duplexify@^3.5.0, duplexify@^3.5.4, duplexify@^3.6.0:
   version "3.6.0"
   resolved "https://registry.yarnpkg.com/duplexify/-/duplexify-3.6.0.tgz#592903f5d80b38d037220541264d69a198fb3410"
   dependencies:
@@ -1302,6 +1352,23 @@ https-browserify@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/https-browserify/-/https-browserify-1.0.0.tgz#ec06c10e0a34c0f2faf199f7fd7fc78fffd03c73"
 
+hypercore-archiver@^4.6.0:
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/hypercore-archiver/-/hypercore-archiver-4.6.0.tgz#cf0a614d335a8bc10e24f9ae8fd87c4a6f31e4c6"
+  dependencies:
+    dat-swarm-defaults "^1.0.1"
+    datcat "^1.1.0"
+    debug "^2.6.8"
+    discovery-swarm "^4.3.7"
+    hypercore "^6.6.3"
+    hypercore-protocol "^6.4.0"
+    pump "^3.0.0"
+    random-access-file "^1.8.1"
+    through2 "^2.0.3"
+    thunky "^1.0.2"
+    to-buffer "^1.1.0"
+    xtend "^4.0.1"
+
 hypercore-crypto@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/hypercore-crypto/-/hypercore-crypto-1.0.0.tgz#90dfd2c77364483d24af204b9a99136cb6320de6"
@@ -1310,6 +1377,19 @@ hypercore-crypto@^1.0.0:
     buffer-from "^1.1.0"
     sodium-universal "^2.0.0"
     uint64be "^2.0.2"
+
+hypercore-protocol@^6.4.0:
+  version "6.7.1"
+  resolved "https://registry.yarnpkg.com/hypercore-protocol/-/hypercore-protocol-6.7.1.tgz#e0f51c8594b1ea8639a4499296f77bf96d2619d6"
+  dependencies:
+    buffer-alloc-unsafe "^1.0.0"
+    buffer-from "^1.0.0"
+    inherits "^2.0.3"
+    protocol-buffers-encodings "^1.1.0"
+    readable-stream "^2.2.6"
+    sodium-universal "^2.0.0"
+    sorted-indexof "^1.0.0"
+    varint "^5.0.0"
 
 hypercore-protocol@^6.4.1:
   version "6.6.4"
@@ -1324,7 +1404,7 @@ hypercore-protocol@^6.4.1:
     sorted-indexof "^1.0.0"
     varint "^5.0.0"
 
-hypercore@^6.18.2:
+hypercore@^6.10.4, hypercore@^6.13.0, hypercore@^6.18.2, hypercore@^6.6.3:
   version "6.18.2"
   resolved "https://registry.yarnpkg.com/hypercore/-/hypercore-6.18.2.tgz#0680b8d12b34764faf3b0d765551be8a9e03e14b"
   dependencies:
@@ -1365,6 +1445,25 @@ hyperdiscovery@^8.0.0:
     safe-buffer "^5.1.2"
     xtend "^4.0.1"
 
+hyperdrive@^9.12.3:
+  version "9.14.0"
+  resolved "https://registry.yarnpkg.com/hyperdrive/-/hyperdrive-9.14.0.tgz#d91d8fc32c9594a4b477accdebae0f298d5e07b8"
+  dependencies:
+    append-tree "^2.3.5"
+    duplexify "^3.5.0"
+    from2 "^2.3.0"
+    hypercore "^6.10.4"
+    inherits "^2.0.3"
+    mutexify "^1.1.0"
+    protocol-buffers-encodings "^1.1.0"
+    random-access-file "^2.0.1"
+    sodium-universal "^2.0.0"
+    stream-collector "^1.0.1"
+    stream-each "^1.2.0"
+    thunky "^1.0.2"
+    uint64be "^2.0.1"
+    unixify "^1.0.0"
+
 iconv-lite@^0.4.22, iconv-lite@^0.4.4:
   version "0.4.23"
   resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.23.tgz#297871f63be507adcfbfca715d0cd0eed84e9a63"
@@ -1388,6 +1487,10 @@ ignore-walk@^3.0.1:
 ignore@^3.3.5:
   version "3.3.10"
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-3.3.10.tgz#0a97fb876986e8081c631160f8f9f389157f0043"
+
+immutable@^3.8.2:
+  version "3.8.2"
+  resolved "https://registry.yarnpkg.com/immutable/-/immutable-3.8.2.tgz#c2439951455bb39913daf281376f1530e104adf3"
 
 import-local@^1.0.0:
   version "1.0.0"
@@ -1911,6 +2014,10 @@ mute-stream@0.0.7:
   version "0.0.7"
   resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.7.tgz#3075ce93bc21b8fab43e1bc4da7e8115ed1e7bab"
 
+mutexify@^1.1.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/mutexify/-/mutexify-1.2.0.tgz#45597975a2b035f56dcf61ff15cc8d73c28e7639"
+
 nan@^2.4.0:
   version "2.11.0"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.11.0.tgz#574e360e4d954ab16966ec102c0c049fd961a099"
@@ -2269,6 +2376,13 @@ public-encrypt@^4.0.0:
     parse-asn1 "^5.0.0"
     randombytes "^2.0.1"
 
+pump@^1.0.1:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/pump/-/pump-1.0.3.tgz#5dfe8311c33bbf6fc18261f9f34702c47c08a954"
+  dependencies:
+    end-of-stream "^1.1.0"
+    once "^1.3.1"
+
 pump@^2.0.0, pump@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/pump/-/pump-2.0.1.tgz#12399add6e4cf7526d973cbc8b5ce2e2908b3909"
@@ -2311,12 +2425,34 @@ querystring@0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/querystring/-/querystring-0.2.0.tgz#b209849203bb25df820da756e747005878521620"
 
+random-access-chrome-file@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/random-access-chrome-file/-/random-access-chrome-file-1.1.1.tgz#03b8f2cfda3369fedd22ac78f9494630910674e6"
+  dependencies:
+    random-access-storage "^1.3.0"
+
+random-access-file@^1.8.1:
+  version "1.8.1"
+  resolved "https://registry.yarnpkg.com/random-access-file/-/random-access-file-1.8.1.tgz#b1a54a0f924fbd4d45731a5771aea36be2166532"
+  dependencies:
+    buffer-alloc-unsafe "^1.0.0"
+    debug "^2.5.2"
+    inherits "^2.0.1"
+    mkdirp "^0.5.1"
+    thunky "^1.0.1"
+
 random-access-file@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/random-access-file/-/random-access-file-2.0.1.tgz#dc22de79270e9a84cb36a2419b759725930dcaeb"
   dependencies:
     mkdirp "^0.5.1"
     random-access-storage "^1.1.1"
+
+random-access-memory@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/random-access-memory/-/random-access-memory-2.4.0.tgz#72f3d865b4b55a259879473e2fb2de3569c69ee2"
+  dependencies:
+    process-nextick-args "^1.0.7"
 
 random-access-memory@^3.0.0:
   version "3.0.0"
@@ -2326,7 +2462,7 @@ random-access-memory@^3.0.0:
     is-options "^1.0.1"
     random-access-storage "^1.1.1"
 
-random-access-storage@^1.1.1:
+random-access-storage@^1.1.1, random-access-storage@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/random-access-storage/-/random-access-storage-1.3.0.tgz#d27e4d897b79dc4358afc2bbe553044e5c8cfe35"
   dependencies:
@@ -2690,7 +2826,13 @@ stream-browserify@^2.0.1:
     inherits "~2.0.1"
     readable-stream "^2.0.2"
 
-stream-each@^1.1.0:
+stream-collector@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/stream-collector/-/stream-collector-1.0.1.tgz#4d4e55f171356121b2c5f6559f944705ab28db15"
+  dependencies:
+    once "^1.3.1"
+
+stream-each@^1.1.0, stream-each@^1.2.0:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/stream-each/-/stream-each-1.2.3.tgz#ebe27a0c389b04fbcc233642952e10731afa9bae"
   dependencies:
@@ -2774,7 +2916,7 @@ tar@^4:
     safe-buffer "^5.1.2"
     yallist "^3.0.2"
 
-through2@^2.0.0:
+through2@^2.0.0, through2@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/through2/-/through2-2.0.3.tgz#0004569b37c7c74ba39c43f3ced78d1ad94140be"
   dependencies:
@@ -2809,7 +2951,7 @@ to-arraybuffer@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/to-arraybuffer/-/to-arraybuffer-1.0.1.tgz#7d229b1fcc637e466ca081180836a7aabff83f43"
 
-to-buffer@^1.0.1:
+to-buffer@^1.0.1, to-buffer@^1.1.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/to-buffer/-/to-buffer-1.1.1.tgz#493bd48f62d7c43fcded313a03dcadb2e1213a80"
 
@@ -2834,6 +2976,14 @@ to-regex@^3.0.1, to-regex@^3.0.2:
     extend-shallow "^3.0.2"
     regex-not "^1.0.2"
     safe-regex "^1.1.0"
+
+transit-immutable-js@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/transit-immutable-js/-/transit-immutable-js-0.7.0.tgz#993e25089b6311ff402140f556276d6d253005d9"
+
+transit-js@^0.8.861:
+  version "0.8.861"
+  resolved "https://registry.yarnpkg.com/transit-js/-/transit-js-0.8.861.tgz#829e516b80349a41fff5d59f5e6993b5473f72c9"
 
 tslib@^1.9.0:
   version "1.9.3"
@@ -2893,6 +3043,12 @@ unique-slug@^2.0.0:
   resolved "https://registry.yarnpkg.com/unique-slug/-/unique-slug-2.0.0.tgz#db6676e7c7cc0629878ff196097c78855ae9f4ab"
   dependencies:
     imurmurhash "^0.1.4"
+
+unixify@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/unixify/-/unixify-1.0.0.tgz#3a641c8c2ffbce4da683a5c70f03a462940c2090"
+  dependencies:
+    normalize-path "^2.1.1"
 
 unordered-array-remove@^1.0.2:
   version "1.0.2"
@@ -2954,7 +3110,7 @@ util@^0.10.3:
   dependencies:
     inherits "2.0.3"
 
-utp-native@^1.7.2:
+utp-native@^1.2.2, utp-native@^1.7.2:
   version "1.7.3"
   resolved "https://registry.yarnpkg.com/utp-native/-/utp-native-1.7.3.tgz#c829724995bfcd9dfb3027389e5c0bf8ddaa0bf2"
   dependencies:
@@ -2968,6 +3124,10 @@ utp@^0.0.10:
   dependencies:
     buffer-alloc "^1.1.0"
     cyclist "~0.1.0"
+
+uuid@3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.1.0.tgz#3dd3d3e790abc24d7b0d3a034ffababe28ebbc04"
 
 v8-compile-cache@^2.0.0:
   version "2.0.2"
