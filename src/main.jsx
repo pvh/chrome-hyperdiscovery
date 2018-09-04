@@ -11,7 +11,6 @@ setTimeout( ()=> {
   let hm = new Hypermerge({ storage: racf })
   hm.once('ready', () => {
     hm.joinSwarm()
-    cb()
   })
 
 }, 1000)
