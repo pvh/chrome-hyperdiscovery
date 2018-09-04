@@ -1,20 +1,28 @@
+setTimeout(() => {
+  let docId = process.argv[2]
 
-setTimeout( ()=> {
-  let Hypermerge = require('./src/hypermerge/index')
-//  let storage = require("random-access-chrome-file")
-  var storage = require('random-access-file')
-//  var storage = require('random-access-memory')
+  let Hypermerge = require("./src/hypermerge/index")
+  //  let storage = require("random-access-chrome-file")
+  //  let storage = require('random-access-memory')
 
+  let hm = new Hypermerge({ storage: ".data" })
 
-  let hm = new Hypermerge({ path: "derp", storage: storage })
-  hm.once('ready', () => {
+  hm.once("ready", () => {
     hm.joinSwarm()
-//    var doc = hm.create();
-//    var id = hm.getId(doc);
-//    var handle = hm.openHandle(id);
-    var handle = hm.openHandle(process.argv[2]);
-    console.log("HANDLE",handle);
+
+    if (!docId) {
+      let doc = hm.create()
+      docId = hm.getId(doc)
+      console.log("created new doc", docId)
+    }
+
+    let handle = hm.openHandle(docId)
+
+    handle.change(doc => {
+      doc.updatedAt = new Date().toISOString()
+    })
+
+    console.log("HANDLE", handle)
     handle.onChange(console.log)
   })
-
 }, 1000)

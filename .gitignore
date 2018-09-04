@@ -1,6 +1,5 @@
 node_modules
 /dist/
-/changes/
-/feeds/
+/.data
 *.log
 .DS_Store
