@@ -10,6 +10,7 @@ export default class Debug extends React.Component {
 
     hm.on("ready", this.changed)
       .on("document:updated", this.changed)
+      .on("document:ready", this.changed)
       .on("peer:added", this.changed)
       .on("peer:left", this.changed)
 

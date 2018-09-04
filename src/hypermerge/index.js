@@ -557,6 +557,7 @@ class Hypermerge extends EventEmitter {
 
           this.readyIndex[docId] = true
           const doc = this.find(docId)
+          this.emit("document:ready", docId, doc)
           this._handles(docId).forEach(handle => {
             handle._ready(doc)
           })
