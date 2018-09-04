@@ -1,6 +1,7 @@
 import * as React from "react"
 import DebugSwarm from "./DebugSwarm"
 import DebugObject from "./DebugObject"
+import DebugLogger from "./DebugLogger"
 
 export default class DebugHome extends React.Component {
   state = { docId: "" }
@@ -48,6 +49,7 @@ export default class DebugHome extends React.Component {
           {orphanedFeedIds.map(feedId => (
             <li key={feedId}>
               <a href={`#feed/${feedId}`}>{feedId}</a>
+              <DebugLogger tag="feed" get={() => hm._trackedFeed(feedId)} />
             </li>
           ))}
           <DebugSwarm swarm={hm.swarm} />
