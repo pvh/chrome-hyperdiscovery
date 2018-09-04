@@ -25,26 +25,44 @@ export default class Debug extends React.Component {
       <div
         style={{
           userSelect: "text",
-          overflow: "auto",
           position: "fixed",
           top: 0,
           left: 0,
           bottom: 0,
           right: 0,
           backgroundColor: "white",
-          padding: 20,
+          display: "grid",
+          gridTemplateRows: "auto 1fr",
         }}>
-        <ul>
-          <li>
+        <div
+          style={{
+            padding: 5,
+            margin: 0,
+            borderBottom: "1px solid #ddd",
+            WebkitAppRegion: "drag",
+            display: "flex",
+            alignItems: "center",
+          }}>
+          <div style={{ WebkitAppRegion: "no-drag" }}>
             <a href="#">Home</a>
-          </li>
-          <li>
-            <a href="" onClick={this.reload}>
-              Reload
-            </a>
-          </li>
-        </ul>
-        <div>{this.renderRoute()}</div>
+          </div>
+
+          <div
+            style={{
+              marginLeft: "auto",
+              WebkitAppRegion: "no-drag",
+              userSelect: "none",
+            }}>
+            <button onClick={this.reload}>Reload data</button>
+          </div>
+        </div>
+        <div
+          style={{
+            overflow: "auto",
+            padding: 20,
+          }}>
+          {this.renderRoute()}
+        </div>
       </div>
     )
   }

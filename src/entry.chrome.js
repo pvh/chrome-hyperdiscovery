@@ -8,7 +8,11 @@ chrome.app.runtime.onLaunched.addListener(() => {
   } else {
     chrome.app.window.create(
       "index.html",
-      { id: "mainwin", innerBounds: { width: 800, height: 609, left: 0 } },
+      {
+        id: "mainwin",
+        innerBounds: { width: 800, height: 609, left: 0 },
+        frame: "none",
+      },
       win => {
         commandWindow = win
       },
