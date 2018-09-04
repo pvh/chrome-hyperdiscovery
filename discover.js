@@ -9,13 +9,12 @@ setTimeout( ()=> {
   let hm = new Hypermerge({ path: "derp", storage: storage })
   hm.once('ready', () => {
     hm.joinSwarm()
-    var doc = hm.create();
-    var id = hm.getId(doc);
-    var handle = hm.openHandle(id);
-//    var handle = hm.openHandle("cbfda8d7647862f250c6a627e1f48393e3df60a1825acd93fba15d575f6f3034");
-//    console.log("DOC",doc);
-//    console.log("ID",id);
+//    var doc = hm.create();
+//    var id = hm.getId(doc);
+//    var handle = hm.openHandle(id);
+    var handle = hm.openHandle(process.argv[2]);
     console.log("HANDLE",handle);
+    handle.onChange(console.log)
   })
 
 }, 1000)
