@@ -17,7 +17,6 @@ module.exports = {
     alias: {
       dgram: "chrome-dgram",
       debug: "chrome-debug",
-      "multicast-dns": "chrome-multicast-dns",
       net: "chrome-net",
       "utp-native": "utp",
       "bittorrent-dht": path.resolve(__dirname, "stubs", "bittorrent-dht"),

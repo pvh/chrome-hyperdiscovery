@@ -1,48 +1,40 @@
 
-process.hrtime = require('browser-process-hrtime')
+const racf = require('random-access-chrome-file')
+const dgram = require('chrome-dgram')
+const mdns = require('multicast-dns')
+const hd = require('hyperdiscovery')
+const hypercore = require('hypercore')
 
-setTimeout( ()=> {
+const hyperclock = require('hyperclock')
 
-/*
-  let Hypermerge = require('../src/hypermerge/index')
-  let racf = require("random-access-chrome-file")
-//  var raf = require('random-access-file')
-//  var ram = require('random-access-memory')
+const socket = dgram.createSocket('udp4')
 
-  let hm = new Hypermerge({ storage: racf })
-  hm.once('ready', () => {
-    hm.joinSwarm()
+socket.setMulticastTTL(255)
+socket.setMulticastLoopback(true)
+
+chrome.system.network.getNetworkInterfaces((ifaces) => {
+  socket.on('listening', function () {
+    for (let i = 0; i < ifaces.length; i++) {
+      if (ifaces[i].prefixLength == 24) {
+        socket.addMembership('224.0.0.251', ifaces[i].address)
+      }
+    }
+    run(socket)
   })
-*/
-
-
-var swarm = require('discovery-swarm');
-
-var DAT_DOMAIN = 'dat.local'
-var DEFAULT_DISCOVERY = [
-  'discovery1.datprotocol.com',
-  'discovery2.datprotocol.com'
-]
-
-var apptype = `discover.js`
-
-var sw = swarm({utp: true, tcp: false, dht: false }) //, dns: {server: DEFAULT_DISCOVERY, domain: DAT_DOMAIN}})
-
-console.log("SW._utp",sw._utp);
-
-sw.listen(0, () => console.log("we are on port ", sw.address().port))
-sw.join('peter') // can be any id/name/hash
-
-sw.on('peer', function(peer) {
-  console.log('peer discovered', peer.host, ':', peer.port)
+  socket.bind(5300)
 })
 
-sw.on('connection', function (connection) {
-  console.log('found + connected to peer')
-  connection.write(`hello from a ${apptype} on port ${sw.address().port}`)
-  connection.on('data', function (data) {
-    console.log('echo: ' + data)
-  })
-})
 
-}, 1000)
+function run (socket) {
+  const multicast = mdns({socket, bind: false, port: 5300, multicast: false})
+
+  // replace this with your own hypercore
+  const feed = require('hyperclock')(name => racf('/clock/' + name))
+  feed.on('ready', function () {
+    console.log(feed.key.toString('hex'))
+    hd(feed, {
+      dht: false,
+      dns: {multicast}
+    })
+  })
+}
