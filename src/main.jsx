@@ -1,14 +1,14 @@
+
 import * as React from "react"
 import { render } from "react-dom"
 import App from "./components/App"
 import racf from 'random-access-chrome-file'
 import dgram from 'chrome-dgram'
 import mdns from 'multicast-dns'
-import hd from 'hyperdiscovery'
 import hypercore from 'hypercore'
-import Hypermerge from "./hypermerge"
-
 process.hrtime = require("browser-process-hrtime")
+let hd = require('hyperdiscovery')
+let Hypermerge = require("./hypermerge")
 
 const MDNS_PORT = 5307
 
@@ -35,8 +35,6 @@ setTimeout(() => {
     socket.bind(MDNS_PORT)
   })
 }, 1000)
-
-
 
 function run(socket) {
   const multicast = mdns({ socket, bind: false, port: MDNS_PORT, multicast: false })
