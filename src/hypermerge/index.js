@@ -4,6 +4,7 @@ const Multicore = require("./multicore")
 const discoverySwarm = require("discovery-swarm")
 const swarmDefaults = require("dat-swarm-defaults")
 const Debug = require("debug")
+const Base58 = require("bs58")
 
 const log = Debug("hypermerge:index")
 
@@ -24,6 +25,16 @@ const METADATA = {
   hypermerge: 1,
 }
 
+function cleanDocId(id) {
+  if (id.length == 64) {
+    return Base58.encode(Buffer.from(id,"hex"));
+  }
+  if (id.length == 44) {
+    return id;
+  }
+  throw new Error("Invalid StoreId: "+id)
+}
+
 /**
  * An Automerge document.
  * @typedef {object} Document
@@ -36,7 +47,7 @@ class DocHandle {
   constructor(hm, docId) {
     this.hm = hm
     this.id = docId
-    this._cb = () => { }
+    this._cb = () => {}
   }
 
   get() {
@@ -102,7 +113,7 @@ class DocHandle {
  * @param {boolean} [options.immutableApi=false] - whether to use Immutable.js Automerge API
  * @param {object} [defaultMetadata={}] - default metadata that should be written for new docs
  */
-class Hypermerge extends EventEmitter {
+export default class Hypermerge extends EventEmitter {
   constructor({
     storage,
     immutableApi = false,
@@ -182,10 +193,10 @@ class Hypermerge extends EventEmitter {
         },
         opts,
       )
- 
+
       // need a better deeper copy
       mergedOpts.dns = Object.assign(swarmDefaults().dns, opts.dns)
- 
+
       this.swarm = discoverySwarm(mergedOpts)
 
 
@@ -242,8 +253,10 @@ class Hypermerge extends EventEmitter {
     return this._actorToId(this._getActorId(doc))
   }
 
-  openHandle(docId) {
+  openHandle(_docId) {
     this._ensureReady()
+
+    const docId = cleanDocId(_docId);
 
     log("openHandle", docId)
 
@@ -343,7 +356,7 @@ class Hypermerge extends EventEmitter {
     return this.change(
       Automerge.merge(doc, parent),
       `Forked from ${parentId}`,
-      () => { },
+      () => {},
     )
   }
 
@@ -367,7 +380,7 @@ class Hypermerge extends EventEmitter {
     return this.change(
       Automerge.merge(dest, source),
       `Merged with ${sourceId}`,
-      () => { },
+      () => {},
     )
   }
 
@@ -380,7 +393,7 @@ class Hypermerge extends EventEmitter {
   delete(docId) {
     log("delete", docId)
     const doc = this.find(docId)
-    this.core.archiver.remove(docId)
+    this.core.archiver.remove(Base58.decode(docId))
     delete this.feeds[docId]
     delete this.docs[docId]
     return doc
@@ -425,7 +438,8 @@ class Hypermerge extends EventEmitter {
 
   _create(metadata, parentMetadata = {}) {
     const feed = this._trackedFeed()
-    const actorId = feed.key.toString("hex")
+    const actorId = Base58.encode(feed.key)
+
     log("_create", actorId)
 
     // Merge together the various sources of metadata, from lowest-priority to
@@ -483,7 +497,8 @@ class Hypermerge extends EventEmitter {
   // Finds or creates, and returns, a feed that is not yet tracked. See `feed`
   // for cases for `actorId`.
   _feed(actorId = null) {
-    const key = actorId ? Buffer.from(actorId, "hex") : null
+    const key = actorId ? Base58.decode(actorId) : null
+
     log("_feed", actorId)
     return this.core.createFeed(key)
   }
@@ -498,6 +513,7 @@ class Hypermerge extends EventEmitter {
   // * `actorId` is given and we know of the feed already - return from cache.
   _trackedFeed(actorId = null) {
     this._ensureReady()
+
 
     if (actorId && this.feeds[actorId]) {
       return this.feeds[actorId]
@@ -545,7 +561,8 @@ class Hypermerge extends EventEmitter {
   // setting up listeners for when peers are added/removed, data is
   // downloaded, etc.
   _trackFeed(feed) {
-    const actorId = feed.key.toString("hex")
+    const actorId = Base58.encode(feed.key)
+
     log("_trackFeed", actorId)
 
     this.feeds[actorId] = feed
@@ -831,7 +848,7 @@ class Hypermerge extends EventEmitter {
        *
        * @event document:updated
        *
-       * @param {string} docId - the hex id representing this document
+       * @param {string} docId - the base58 id representing this document
        * @param {Document} doc - Automerge document
        */
       this.emit("document:updated", docId, doc)
@@ -861,7 +878,7 @@ class Hypermerge extends EventEmitter {
     log("_onMulticoreReady")
 
     const actorIds = Object.values(this.core.archiver.feeds).map(feed =>
-      feed.key.toString("hex"),
+      Base58.encode(feed.key),
     )
 
     this._initFeeds(actorIds).then(() => {
@@ -972,4 +989,4 @@ class Hypermerge extends EventEmitter {
   }
 }
 
-module.exports = Hypermerge
+//module.exports = Hypermerge
