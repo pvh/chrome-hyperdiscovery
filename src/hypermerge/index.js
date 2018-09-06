@@ -145,17 +145,20 @@ class Hypermerge extends EventEmitter {
 
     if (opts.port == null) opts.port = 0
 
-    this.swarm = discoverySwarm(
-      Object.assign(
-        swarmDefaults(),
-        {
-          hash: false,
-          encrypt: true,
-          stream: opts => this.replicate(opts),
-        },
-        opts,
-      ),
+    let mergedOpts = Object.assign(
+      swarmDefaults(),
+      {
+        hash: false,
+        encrypt: true,
+        stream: opts => this.replicate(opts),
+      },
+      opts,
     )
+
+    // need a better deeper copy
+    mergedOpts.dns = Object.assign(swarmDefaults().dns, opts.dns)
+
+    this.swarm = discoverySwarm(mergedOpts)
 
     this.swarm.join(this.core.archiver.changes.discoveryKey)
 
