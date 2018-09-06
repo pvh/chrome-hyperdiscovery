@@ -1,9 +1,9 @@
 import * as React from "react"
-import Debug from "./Debug"
+import Debugger from "./Debugger"
 
 export default class App extends React.Component {
   render() {
     const { hm } = this.props
-    return <Debug hm={hm} />
+    return <Debugger hm={hm} />
   }
 }

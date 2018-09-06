@@ -1,5 +1,5 @@
 import * as React from "react"
-import DebugObject from "./DebugObject"
+import Debug from "./Debug"
 
 export default class DebugDoc extends React.Component {
   state = { doc: null }
@@ -19,14 +19,19 @@ export default class DebugDoc extends React.Component {
 
     return (
       <div>
-        <h3>Doc id:</h3>
+        <h3>Id:</h3>
         <div>{id}</div>
+
+        <h3>Doc:</h3>
+        <div>
+          <Debug value={doc} />
+        </div>
 
         <h3>Vector clock:</h3>
         <DebugClock doc={doc} />
 
         <h3>Metadata:</h3>
-        <DebugObject obj={hm.metadata(id)} />
+        <Debug value={hm.metadata(id)} />
       </div>
     )
   }

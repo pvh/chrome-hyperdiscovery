@@ -1,5 +1,5 @@
 import * as React from "react"
-import DebugDoc from "./DebugDoc"
+import Debug from "./Debug"
 
 export default class DebugSwarm extends React.Component {
   componentDidMount() {
@@ -12,6 +12,7 @@ export default class DebugSwarm extends React.Component {
     return (
       <div>
         <h3>Connections:</h3>
+        <Debug value={swarm && swarm.connections} />
 
         <h3>Seen Peers:</h3>
       </div>

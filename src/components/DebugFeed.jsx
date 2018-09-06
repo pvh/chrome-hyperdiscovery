@@ -1,5 +1,5 @@
 import * as React from "react"
-import DebugObject from "./DebugObject"
+import Debug from "./Debug"
 
 export default class DebugFeed extends React.Component {
   componentDidMount() {
@@ -19,7 +19,7 @@ export default class DebugFeed extends React.Component {
         <h3>Feed id:</h3>
         <div>{id}</div>
 
-        <DebugObject obj={feed} />
+        <Debug value={feed} />
       </div>
     )
   }

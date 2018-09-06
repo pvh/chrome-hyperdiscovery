@@ -1,6 +1,6 @@
 import * as React from "react"
 import DebugSwarm from "./DebugSwarm"
-import DebugObject from "./DebugObject"
+import Debug from "./Debug"
 import DebugLogger from "./DebugLogger"
 
 export default class DebugHome extends React.Component {
@@ -42,7 +42,7 @@ export default class DebugHome extends React.Component {
         <DebugSwarm swarm={hm.swarm} />
 
         <h3>Swarm:</h3>
-        <DebugObject obj={hm.swarm} />
+        <Debug value={hm.swarm} />
 
         <h3>Orphaned feeds:</h3>
         <ul>
