@@ -133,6 +133,33 @@ class Hypermerge extends EventEmitter {
         resolve()
       })
     })
+
+  }
+
+  chromeJoinSwarm() {
+    const MDNS_PORT = 5307
+    const dgram = require('chrome-dgram');
+    const socket = dgram.createSocket('udp4')
+    const mdns = require('multicast-dns')
+
+    socket.setMulticastTTL(255)
+    socket.setMulticastLoopback(true)
+
+    chrome.system.network.getNetworkInterfaces((ifaces) => {
+      socket.on('listening', () => {
+        for (let i = 0; i < ifaces.length; i++) {
+          if (ifaces[i].prefixLength == 24) {
+            socket.addMembership('224.0.0.251', ifaces[i].address)
+          }
+        }
+        const multicast = mdns({ socket, bind: false, port: MDNS_PORT, multicast: false })
+        this.joinSwarm({
+          dht: false,
+          dns: { multicast }
+        })
+      })
+      socket.bind(MDNS_PORT)
+    })
   }
 
   /**
@@ -140,48 +167,51 @@ class Hypermerge extends EventEmitter {
    * Must be called after `'ready'` has been emitted. `opts` are passed to discovery-swarm.
    */
   joinSwarm(opts = {}) {
-    this._ensureReady()
-    log("joinSwarm")
+    if (opts.chrome === true) { return this.chromeJoinSwarm(); }
+    return this.ready.then(() => {
+      log("joinSwarm")
 
-    if (opts.port == null) opts.port = 0
+      if (opts.port == null) opts.port = 0
 
-    let mergedOpts = Object.assign(
-      swarmDefaults(),
-      {
-        hash: false,
-        encrypt: true,
-        stream: opts => this.replicate(opts),
-      },
-      opts,
-    )
+      let mergedOpts = Object.assign(
+        swarmDefaults(),
+        {
+         hash: false,
+         encrypt: true,
+         stream: opts => this.replicate(opts),
+        },
+        opts,
+      )
+ 
+      // need a better deeper copy
+      mergedOpts.dns = Object.assign(swarmDefaults().dns, opts.dns)
+ 
+      this.swarm = discoverySwarm(mergedOpts)
 
-    // need a better deeper copy
-    mergedOpts.dns = Object.assign(swarmDefaults().dns, opts.dns)
 
-    this.swarm = discoverySwarm(mergedOpts)
+      this.swarm.join(this.core.archiver.changes.discoveryKey)
 
-    this.swarm.join(this.core.archiver.changes.discoveryKey)
+      Object.values(this.feeds).forEach(feed => {
+        this.swarm.join(feed.discoveryKey)
+      })
 
-    Object.values(this.feeds).forEach(feed => {
-      this.swarm.join(feed.discoveryKey)
-    })
+      this.core.archiver.on("add", feed => {
+        this.swarm.join(feed.discoveryKey)
+      })
 
-    this.core.archiver.on("add", feed => {
-      this.swarm.join(feed.discoveryKey)
-    })
+      this.core.archiver.on("remove", feed => {
+        this.swarm.leave(feed.discoveryKey)
+      })
 
-    this.core.archiver.on("remove", feed => {
-      this.swarm.leave(feed.discoveryKey)
-    })
-
-    this.swarm.listen(opts.port)
-
-    this.swarm.once("error", err => {
-      log("joinSwarm.error", err)
       this.swarm.listen(opts.port)
-    })
 
-    return this
+      this.swarm.once("error", err => {
+        log("joinSwarm.error", err)
+        this.swarm.listen(opts.port)
+      })
+
+      return this
+    })
   }
 
   /**
