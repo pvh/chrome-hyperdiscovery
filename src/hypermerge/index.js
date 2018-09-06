@@ -36,7 +36,7 @@ class DocHandle {
   constructor(hm, docId) {
     this.hm = hm
     this.id = docId
-    this._cb = () => {}
+    this._cb = () => { }
   }
 
   get() {
@@ -100,13 +100,11 @@ class DocHandle {
  * @param {object} options
  * @param {object} options.storage - config compatible with Hypercore constructor storage param
  * @param {boolean} [options.immutableApi=false] - whether to use Immutable.js Automerge API
- * @param {number} [options.port=0] - port number to listen on
  * @param {object} [defaultMetadata={}] - default metadata that should be written for new docs
  */
 class Hypermerge extends EventEmitter {
   constructor({
     storage,
-    port = 0,
     immutableApi = false,
     defaultMetadata = {},
   }) {
@@ -114,7 +112,6 @@ class Hypermerge extends EventEmitter {
 
     this.immutableApi = immutableApi
     this.defaultMetadata = defaultMetadata
-    this.port = port
 
     this.isReady = false
     this.feeds = {}
@@ -146,17 +143,17 @@ class Hypermerge extends EventEmitter {
     this._ensureReady()
     log("joinSwarm")
 
+    if (opts.port == null) opts.port = 0
+
     this.swarm = discoverySwarm(
-      swarmDefaults(
-        Object.assign(
-          {
-            port: this.port,
-            hash: false,
-            encrypt: true,
-            stream: opts => this._replicate(opts),
-          },
-          opts,
-        ),
+      Object.assign(
+        swarmDefaults(),
+        {
+          hash: false,
+          encrypt: true,
+          stream: opts => this.replicate(opts),
+        },
+        opts,
       ),
     )
 
@@ -174,11 +171,11 @@ class Hypermerge extends EventEmitter {
       this.swarm.leave(feed.discoveryKey)
     })
 
-    this.swarm.listen(this.port)
+    this.swarm.listen(opts.port)
 
     this.swarm.once("error", err => {
       log("joinSwarm.error", err)
-      this.swarm.listen()
+      this.swarm.listen(opts.port)
     })
 
     return this
@@ -313,7 +310,7 @@ class Hypermerge extends EventEmitter {
     return this.change(
       Automerge.merge(doc, parent),
       `Forked from ${parentId}`,
-      () => {},
+      () => { },
     )
   }
 
@@ -337,7 +334,7 @@ class Hypermerge extends EventEmitter {
     return this.change(
       Automerge.merge(dest, source),
       `Merged with ${sourceId}`,
-      () => {},
+      () => { },
     )
   }
 
@@ -370,6 +367,10 @@ class Hypermerge extends EventEmitter {
    */
   metadata(actorId) {
     return this.metaIndex[actorId]
+  }
+
+  replicate(opts) {
+    return this.core.replicate(opts)
   }
 
   /**
@@ -471,10 +472,6 @@ class Hypermerge extends EventEmitter {
 
     log("feed.init", actorId)
     return this._trackFeed(this._feed(actorId))
-  }
-
-  _replicate(opts) {
-    return this.core.replicate(opts)
   }
 
   // Append the given `metadata` for the given `actorId` to the corresponding

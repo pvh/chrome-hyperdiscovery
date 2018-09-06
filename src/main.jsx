@@ -10,6 +10,8 @@ import Hypermerge from "./hypermerge"
 
 process.hrtime = require("browser-process-hrtime")
 
+const MDNS_PORT = 5307
+
 setTimeout(() => {
   let hm = new Hypermerge({ storage: racf })
   window.hm = hm
@@ -30,14 +32,14 @@ setTimeout(() => {
       }
       run(socket)
     })
-    socket.bind(5300)
+    socket.bind(MDNS_PORT)
   })
 }, 1000)
 
 
 
 function run(socket) {
-  const multicast = mdns({ socket, bind: false, port: 5300, multicast: false })
+  const multicast = mdns({ socket, bind: false, port: MDNS_PORT, multicast: false })
 
   hm.ready.then(() => {
     hm.joinSwarm({
