@@ -1,4 +1,5 @@
 import * as React from "react"
+import * as Link from '../data/Link'
 import DebugSwarm from "./DebugSwarm"
 import Debug from "./Debug"
 import DebugLogger from "./DebugLogger"
@@ -17,10 +18,10 @@ export default class DebugHome extends React.Component {
       <div>
         <button onClick={this.createEmptyDoc}>Create new doc</button>
 
-        <h3>Add Doc Id:</h3>
+        <h3>Add Doc:</h3>
         <form onSubmit={this.submitDocId}>
           <input
-            placeholder="abc123"
+            placeholder="abc123 or capstone://abc123"
             size="64"
             onChange={this.docIdChange}
             value={docId}
@@ -73,7 +74,13 @@ export default class DebugHome extends React.Component {
 
     if (!docId) return
 
-    this.props.hm.openHandle(docId)
+    if (docId.startsWith("capstone://")) {
+      const { id } = Link.parse(docId)
+      this.props.hm.openHandle(id)
+    } else {
+      this.props.hm.openHandle(docId)
+    }
+
 
     this.setState({ docId: "" })
   }
