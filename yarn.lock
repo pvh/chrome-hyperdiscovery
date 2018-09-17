@@ -6,6 +6,19 @@
   version "10.10.1"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.10.1.tgz#d5c96ca246a418404914d180b7fdd625ad18eca6"
 
+"@types/prop-types@*":
+  version "15.5.5"
+  resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.5.5.tgz#17038dd322c2325f5da650a94d5f9974943625e3"
+  dependencies:
+    "@types/react" "*"
+
+"@types/react@*", "@types/react@^16.4.14":
+  version "16.4.14"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.4.14.tgz#47c604c8e46ed674bbdf4aabf82b34b9041c6a04"
+  dependencies:
+    "@types/prop-types" "*"
+    csstype "^2.2.0"
+
 "@webassemblyjs/ast@1.5.13":
   version "1.5.13"
   resolved "https://registry.yarnpkg.com/@webassemblyjs/ast/-/ast-1.5.13.tgz#81155a570bd5803a30ec31436bc2c9c0ede38f25"
@@ -600,9 +613,9 @@ chrome-debug@orionz/debug:
   dependencies:
     ms "^2.1.1"
 
-chrome-dgram@^3.0.1:
+chrome-dgram@^3.0.1, "chrome-dgram@github:inkandswitch/chrome-dgram":
   version "3.0.1"
-  resolved "https://registry.yarnpkg.com/chrome-dgram/-/chrome-dgram-3.0.1.tgz#42a388d04da063865a79e3ba2ae5fbf8ab0f1dba"
+  resolved "https://codeload.github.com/inkandswitch/chrome-dgram/tar.gz/f768c662da19ccbb9975c6b0e8c18dbbd793ed58"
   dependencies:
     inherits "^2.0.1"
     run-series "^1.1.2"
@@ -611,9 +624,9 @@ chrome-fs@^10.0.0:
   version "10.0.0"
   resolved "https://registry.yarnpkg.com/chrome-fs/-/chrome-fs-10.0.0.tgz#768561b062892bdf48521670f5f7446fc7060a2f"
 
-chrome-net@^3.3.1:
+"chrome-net@github:inkandswitch/chrome-net":
   version "3.3.1"
-  resolved "https://registry.yarnpkg.com/chrome-net/-/chrome-net-3.3.1.tgz#b4041edb5b264222e7e3c96101344b2332c86782"
+  resolved "https://codeload.github.com/inkandswitch/chrome-net/tar.gz/552e360527d66c35dbc712b615316ded4acb59d9"
   dependencies:
     inherits "^2.0.1"
 
@@ -832,6 +845,10 @@ crypto-browserify@^3.11.0:
     public-encrypt "^4.0.0"
     randombytes "^2.0.0"
     randomfill "^1.0.3"
+
+csstype@^2.2.0:
+  version "2.5.7"
+  resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.5.7.tgz#bf9235d5872141eccfb2d16d82993c6b149179ff"
 
 cyclist@~0.1.0:
   version "0.1.1"
