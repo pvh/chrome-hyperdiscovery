@@ -22,16 +22,14 @@ module.exports = {
       "bittorrent-dht": path.resolve(__dirname, "stubs", "bittorrent-dht"),
       "random-access-file": path.resolve(__dirname, "stubs", "bittorrent-dht"),
     },
-    extensions: [".js", ".jsx"],
+    extensions: [".js", ".jsx", ".ts", ".tsx"],
   },
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.[tj]sx?$/,
+        use: "ts-loader",
         exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-        },
       },
     ],
   },

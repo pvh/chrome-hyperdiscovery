@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "module": "commonjs",
+    "target": "es2015",
+    "lib": [
+      "es2017",
+      "es6",
+      "dom",
+      "dom.iterable",
+      "scripthost"
+    ],
+    "jsx": "react",
+    "experimentalDecorators": true,
+    "allowJs": true,
+    "sourceMap": true
+  },
+  "include": [
+    "src/**/*"
+  ]
+}

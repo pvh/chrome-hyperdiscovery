@@ -2,7 +2,7 @@
 import * as React from "react"
 import { render } from "react-dom"
 import App from "./components/App"
-import racf from 'random-access-chrome-file'
+import * as racf from 'random-access-chrome-file'
 
 process.hrtime = require("browser-process-hrtime")
 let hd = require('hyperdiscovery')
