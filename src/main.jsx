@@ -6,11 +6,11 @@ import racf from 'random-access-chrome-file'
 
 process.hrtime = require("browser-process-hrtime")
 let hd = require('hyperdiscovery')
-let Hypermerge = require("./hypermerge")
+import Hypermerge from "./hypermerge"
 
 setTimeout(() => {
   let hm = new Hypermerge({ storage: racf })
-  hm.joinSwarm({chrome: true});
+  hm.joinSwarm({ chrome: true })
 
   window.hm = hm
 
