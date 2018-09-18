@@ -6,6 +6,17 @@ import DebugLogger from "./DebugLogger"
 
 export default class DebugHome extends React.Component {
   state = { docId: "" }
+  refreshInterval?: number
+
+  componentDidMount() {
+    this.refreshInterval = setInterval(() => this.forceUpdate(), 5000)
+  }
+
+
+  componentWillUnmount() {
+    if (this.refreshInterval != null) clearInterval(this.refreshInterval)
+  }
+
 
   render() {
     const { hm } = this.props
@@ -53,7 +64,6 @@ export default class DebugHome extends React.Component {
               <DebugLogger tag="feed" get={() => hm._trackedFeed(feedId)} />
             </li>
           ))}
-          <DebugSwarm swarm={hm.swarm} />
         </ul>
       </div>
     )
